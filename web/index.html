@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>研读 · PDF 学习工作台</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<svg class="svg-defs" aria-hidden="true"><defs>
+ <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-3-3-7-3-10-2v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 2Zm0 0v15"/></symbol>
+ <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+ <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8l-5-5Zm0 0v5h5M8 12h8M8 16h6"/></symbol>
+ <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 15v6h16v-6"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7M12 5v15"/></symbol>
+ <symbol id="i-setting" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16M8 4v6m8 4v6"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+ <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+ <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+ <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol>
+</defs></svg>
+<div class="app-shell">
+ <aside class="sidebar">
+  <a class="brand" href="/" aria-label="研读工作台首页"><span class="brand-icon"><svg><use href="#i-book"/></svg></span><span>研读<span class="brand-en">STUDY DESK</span></span></a>
+  <button id="new-chat" class="new-chat"><svg><use href="#i-plus"/></svg>开启新对话<span>↗</span></button>
+  <div class="section-label">资料库 <span id="file-count">0</span></div>
+  <div id="file-list" class="file-list"><p class="sidebar-hint">正在读取本地资料…</p></div>
+  <label class="upload-zone" id="drop-zone" for="pdf-upload" tabindex="0">
+   <svg><use href="#i-upload"/></svg><strong id="upload-label">上传课程 PDF</strong><span>点击选择或拖放 · 最大 20 MB</span>
+   <input id="pdf-upload" type="file" accept=".pdf,application/pdf" hidden>
+  </label>
+  <div class="sidebar-bottom"><span class="local-dot"></span>本地运行<span class="sidebar-small">资料与笔记保存在本机</span></div>
+ </aside>
+ <main class="workspace">
+  <header class="topbar"><div class="breadcrumb">我的学习空间 <span>/</span> <b>课程资料工作台</b></div><div class="top-actions"><span class="service-pill" id="service-status"><i></i>连接中</span><button id="open-settings" class="settings-button"><svg><use href="#i-setting"/></svg><span>模型设置</span><i id="key-indicator"></i></button></div></header>
+  <div class="work-layout">
+   <section class="study-pane" aria-label="学习对话">
+    <div class="pane-heading"><div><span class="eyebrow">YOUR READING COMPANION</span><h1>让每一份资料，都读有所获<span>。</span></h1><p>从课程 PDF 出发，整理重点，留下有出处的笔记。</p></div><span class="edition">课程学习助手 <span>01</span></span></div>
+    <div id="conversation" class="conversation" aria-live="polite">
+     <div id="welcome" class="welcome">
+      <div class="welcome-top"><span class="mini-label">准备开始</span><span class="welcome-dots">● ● ●</span></div>
+      <div class="welcome-body"><div><h2>今天，想读懂什么？</h2><p>选择左侧资料，或上传一份新的 PDF。<br>告诉我你的学习目标，我会带着页码找到依据。</p><div class="capabilities"><span>✓ 原文依据</span><span>✓ 页码引用</span><span>✓ 笔记保存</span></div></div>
+       <svg class="paper-art" viewBox="0 0 200 170" aria-hidden="true"><rect x="57" y="27" width="105" height="132" rx="5" fill="#d7e0d1" transform="rotate(10 110 90)"/><rect x="38" y="15" width="106" height="135" rx="5" fill="#fffef8" stroke="#8ca38d"/><path d="M56 39h65M56 55h53M56 71h65M56 87h39M56 111h65M56 125h51" stroke="#b8c5b3" stroke-width="3"/><rect x="54" y="65" width="70" height="11" rx="2" fill="#e9e89e" opacity=".8"/><circle cx="150" cy="122" r="25" fill="#24574b"/><path d="m139 122 8 8 15-17" fill="none" stroke="#fff" stroke-width="3"/></svg>
+      </div>
+      <div class="welcome-footer"><svg><use href="#i-book"/></svg>模型负责思考，工具负责读取与保存。</div>
+     </div>
+     <div class="quick-actions" id="quick-actions">
+      <button data-prompt="请整理这份资料的核心概念、重点和复习提纲，每项注明 PDF 页码。"><span class="quick-number">01</span><strong>整理复习提纲</strong><span>从知识点到清晰结构</span><b>↗</b></button>
+      <button data-prompt="请根据这份资料设计 5 个复习问题，并给出参考答案及对应的 PDF 页码。"><span class="quick-number">02</span><strong>生成复习问答</strong><span>用问题检验理解</span><b>↗</b></button>
+      <button data-prompt="请解释这份资料中最重要的 3 个概念，区分原文和你的补充推断，标明 PDF 页码。"><span class="quick-number">03</span><strong>讲清核心概念</strong><span>回到原文理解要点</span><b>↗</b></button>
+     </div>
+     <div id="messages"></div>
+    </div>
+    <form id="task-form" class="composer">
+     <div class="document-context"><span class="document-chip"><svg><use href="#i-file"/></svg><span id="selected-file">请选择资料</span></span><div class="page-range"><label for="start-page">页码</label><input id="start-page" type="number" min="1" value="1" aria-label="起始页码"><span>至</span><input id="end-page" type="number" min="1" value="2" aria-label="结束页码"></div></div>
+     <label for="task" class="sr-only">学习任务</label><textarea id="task" rows="3" placeholder="例如：帮我整理这份资料的核心概念，并标出对应页码…" maxlength="12000"></textarea>
+     <div class="save-options"><label><input type="checkbox" id="save-notes" checked>同时保存笔记</label><label for="note-name" class="sr-only">笔记文件名</label><input id="note-name" type="text" placeholder="笔记名称.md" aria-label="笔记文件名"></div>
+     <div class="composer-bottom"><span id="composer-hint">Ctrl + Enter 发送 · 支持连续追问</span><button id="send-task" class="primary-button" type="submit"><span>开始研读</span><svg><use href="#i-arrow"/></svg></button></div>
+    </form>
+    <p class="disclaimer">回答基于已读取的资料，重要结论请结合原文核对。</p>
+   </section>
+   <aside class="inspector" aria-label="执行记录与学习笔记">
+    <section class="execution-panel"><div class="panel-title"><h2>执行记录</h2><span class="tiny-tag">LIVE</span></div><p class="panel-subtitle">每一步工具调用，清晰可见</p><div id="run-status" class="run-status">等待开始</div><div id="tool-events" class="tool-events"><div class="trace-empty"><div class="trace-symbol"><svg><use href="#i-spark"/></svg></div><p>你的研读过程会显示在这里</p><span>读取 PDF → 整理内容 → 保存笔记</span></div></div></section>
+    <section class="notes-panel"><div class="panel-title"><h2>学习笔记</h2><span id="note-count" class="count-badge">0</span></div><p class="panel-subtitle">保存的知识，下次继续使用</p><div id="notes-list"></div></section>
+    <div class="tool-info"><span class="tool-info-label">AGENT TOOLS</span><div><span class="tool-dot"></span><b>read_pdf</b><small>读取资料</small></div><div><span class="tool-dot"></span><b>save_notes</b><small>保存笔记</small></div><p>通过 Function Calling 连接模型与本地工具</p></div>
+   </aside>
+  </div>
+ </main>
+</div>
+<dialog id="settings-dialog"><form id="settings-form" class="dialog-content"><div class="dialog-title"><div><span class="eyebrow">CONNECTION</span><h2>连接你的模型</h2></div><button type="button" class="icon-button close-dialog" aria-label="关闭设置"><svg><use href="#i-close"/></svg></button></div><p>配置模型后，就可以开始阅读和整理资料。</p><label for="base-url">API Base URL</label><input id="base-url" type="url" required placeholder="https://api.deepseek.com"><label for="model-name">模型名称</label><input id="model-name" required placeholder="deepseek-flash"><label for="api-key">API 密钥</label><div class="key-input"><input id="api-key" type="password" autocomplete="off" required placeholder="粘贴你的 API 密钥"><button type="button" id="toggle-key">显示</button></div><p class="privacy-note">密钥只在当前页面内存中使用，不写入文件或浏览器存储。资料内容会发送给你配置的模型平台。</p><button class="primary-button" type="submit">使用此配置 <span>→</span></button></form></dialog>
+<dialog id="note-dialog"><div class="note-modal"><div class="dialog-title"><div><span class="eyebrow">YOUR STUDY NOTES</span><h2 id="note-title">学习笔记</h2></div><button class="icon-button close-dialog" aria-label="关闭笔记"><svg><use href="#i-close"/></svg></button></div><div class="note-toolbar"><span>Markdown 预览</span><a id="download-note" class="text-button" href="#"><svg><use href="#i-download"/></svg>下载笔记</a></div><article id="note-preview" class="markdown-body"></article></div></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+</body></html>

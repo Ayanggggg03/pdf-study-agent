@@ -1,0 +1,15 @@
+config.json
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+notes/*
+!notes/.gitkeep
+data/*
+!data/sample.pdf
+!data/.gitkeep
+*.log
+.DS_Store
